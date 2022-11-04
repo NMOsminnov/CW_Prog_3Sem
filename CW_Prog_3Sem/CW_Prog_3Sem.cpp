@@ -1,8 +1,16 @@
-﻿#include <iostream>
+﻿
+#include <iostream>
+
+#include "List.h"
 
 using namespace std;
 
+const char f_name[] = "input.txt";
+
 int main()
 {
-    cout << "Hello World!\n";
+	List* start = new List;
+
+	fileReadList(start, f_name);
+	printConsole(start);
 }
