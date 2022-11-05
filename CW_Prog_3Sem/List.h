@@ -33,7 +33,11 @@ struct List {
 *  ÌÅÒÎÄÛ ÌÀÍÈÏÓËßÖÈÉ ÑÎ ÑÏÈÑÊÀÌÈ  *
 ***********************************/
 
-void addList(List* start, int num);
+void addPage(List* start, int num);
+
+
+void deletePage(List* start);
+void deleteList(List* start);
 
 /**************************
 *   ÌÅÒÎÄÛ ÂÂÎÄÀ-ÂÛÂÎÄÀ	  *
@@ -60,6 +64,20 @@ void setPriceOfAccessories(List* start, int position, string newData);
 void setSupplier(List* start, int position, string newData);
 void setDeliveryTime(List* start, int position, string newData);
 
+	/*******************
+	*  ÔÓÍÊÖÈÈ ÏÎÈÑÊÀ  *
+	*******************/
 
+List* findNumber(List* start, int key);
+List* findNumber(List* start, float key);
+List* findName(List* start, string key);
+List* findSurname(List* start, string key);
+List* findPhoneNumber(List* start, string key);
+List* findType(List* start, string key);
+List* findProductionTime(List* start, string key);
+List* findPriceOfAccessories(List* start, string key);
+List* findPriceOfAccessories(List* start, string key);
+List* findSupplier(List* start, string key);
+List* findDeliveryTime(List* start, string key);
 
 #endif

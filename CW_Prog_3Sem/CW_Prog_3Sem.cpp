@@ -13,4 +13,5 @@ int main()
 
 	fileReadList(start, f_name);
 	printConsole(start);
+	deleteList(start);
 }
