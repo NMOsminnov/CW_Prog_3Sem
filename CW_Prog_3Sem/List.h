@@ -45,6 +45,7 @@ void deleteList(List* start);
 
 void printConsole(List* start);
 void fileReadList(List* start, const char* f_name);
+void fileComplementList(List* start, const char* f_name);
 
 /*********************************************************
 *   ‘”Õ ÷»» Ã¿Õ»œ”Àﬂ÷»… — Œ“ƒ≈À‹Õ€Ã» ƒ¿ÕÕ€Ã» —“–¿Õ»÷€    *
@@ -69,13 +70,12 @@ void setDeliveryTime(List* start, int position, string newData);
 	*******************/
 
 List* findNumber(List* start, int key);
-List* findNumber(List* start, float key);
+List* findPrice(List* start, float key);
 List* findName(List* start, string key);
 List* findSurname(List* start, string key);
 List* findPhoneNumber(List* start, string key);
 List* findType(List* start, string key);
 List* findProductionTime(List* start, string key);
-List* findPriceOfAccessories(List* start, string key);
 List* findPriceOfAccessories(List* start, string key);
 List* findSupplier(List* start, string key);
 List* findDeliveryTime(List* start, string key);
