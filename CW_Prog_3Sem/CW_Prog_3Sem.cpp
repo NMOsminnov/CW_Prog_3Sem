@@ -1,5 +1,6 @@
 ﻿
 #include <iostream>
+#include<string>
 
 #include "List.h"
 
@@ -10,8 +11,16 @@ const char f_name[] = "input.txt";
 int main()
 {
 	List* start = new List;
+	List* answer;
 
 	fileReadList(start, f_name);
 	printConsole(start);
-	deleteList(start);
+	answer = findName(start, "door1");
+
+	cout << "-------------------" << endl;
+	printConsole(answer);
+	cout << "-------------------" << endl;
+	printConsole(start);
+	
+
 }

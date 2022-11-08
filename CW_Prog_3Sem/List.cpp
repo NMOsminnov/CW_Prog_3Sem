@@ -60,7 +60,8 @@ void printConsole(List* start) {
 	List* current = start;
 
 	while (current!=NULL) {	
-		cout<<current->number<<endl
+		cout << endl 
+			<<current->number<<endl
 			<<current->price<<endl			
 			<<current->name<<endl
 			<<current->type<<endl
@@ -69,7 +70,7 @@ void printConsole(List* start) {
 			<<current->surname<<endl
 			<<current->priceOfAccessories<<endl
 			<<current->supplier<<endl
-			<<current->deliveryTime<<endl<<endl;
+			<<current->deliveryTime<<endl;
 
 		current = current->next;
 	}
@@ -83,7 +84,6 @@ void fileReadList(List* start, const char* f_name) {
 	while (!ifs.eof()) {
 		current->number = i;
 		ifs >> current->price;
-
 		ifs >> current->name;
 		ifs >> current->type;
 		ifs >> current->productionTime;
@@ -92,6 +92,7 @@ void fileReadList(List* start, const char* f_name) {
 		ifs >> current->priceOfAccessories;
 		ifs >> current->supplier;
 		ifs >> current->deliveryTime;
+
 		if (!ifs.eof()) {
 			addPage(start, i++);
 			current = current->next;
@@ -99,7 +100,6 @@ void fileReadList(List* start, const char* f_name) {
 	}
 	ifs.close();
 }
-
 void fileComplementList(List* start, const char* f_name) {
 	List* current = start;
 	int i = 1;
@@ -133,6 +133,18 @@ void fileComplementList(List* start, const char* f_name) {
 /*********************************************************
 *   ‘”Õ ÷»» Ã¿Õ»œ”Àﬂ÷»… — Œ“ƒ≈À‹Õ€Ã» ƒ¿ÕÕ€Ã» —“–¿Õ»÷€    *
 *********************************************************/
+
+List* givePage(List* start, int position) {
+	List* current = start;
+
+	for (int i = 0; i < position; i++) {
+		if (current->next = NULL) {
+			break;
+		}
+		current = current->next;
+	}
+	return current;
+}
 
 void setNumber(List* start, int position, int number)
 {
@@ -238,6 +250,18 @@ void setDeliveryTime(List* start, int position, string newData)
 	current->deliveryTime = newData;
 }
 
+void copyData(List* from, List* to) {
+	to->deliveryTime = from->deliveryTime;
+	to->name = from->name;
+	to->number = from->number;
+	to->phoneNumber = from->phoneNumber;
+	to->price = from->price;
+	to->priceOfAccessories = from->priceOfAccessories;
+	to->productionTime = from->productionTime;
+	to->supplier = from->supplier;
+	to->type = from->type;
+}
+
 
 	/*******************
 	*  ‘”Õ ÷»» œŒ»— ¿  *
@@ -247,120 +271,342 @@ void setDeliveryTime(List* start, int position, string newData)
 List* findNumber(List* start, int key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->number == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findPrice(List* start, float key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->price == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findName(List* start, string key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->name == key) {
+			if (!find) {				
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findSurname(List* start, string key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->surname == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findPhoneNumber(List* start, string key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->phoneNumber == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findType(List* start, string key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->type == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findProductionTime(List* start, string key) {
 
-	List* current = start;
 
-	while (current->next != NULL) {
+	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
+
+	while (1) {
 		if (current->productionTime == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findPriceOfAccessories(List* start, string key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->priceOfAccessories == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findSupplier(List* start, string key) {
 
 	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
 
-	while (current->next != NULL) {
+	while (1) {
 		if (current->supplier == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }
 List* findDeliveryTime(List* start, string key) {
 
-	List* current = start;
 
-	while (current->next != NULL) {
+	List* current = start;
+	List* answer = new List;
+	List* current_answer = answer;
+	bool find = false;
+
+	while (1) {
 		if (current->deliveryTime == key) {
+			if (!find) {
+				copyData(current, current_answer);
+				find = true;
+			}
+			else {
+				addPage(current_answer, 1);
+				current_answer = current_answer->next;
+				copyData(current, current_answer);
+			}
+		}
+		if (current->next != NULL) {
+			current = current->next;
+		}
+		else {
 			break;
 		}
-		current = current->next;
 	}
-	return current;
+	if (find) {
+		return answer;
+	}
+	else {
+		delete answer;
+		return NULL;
+	}
 }

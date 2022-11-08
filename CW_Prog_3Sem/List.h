@@ -51,6 +51,8 @@ void fileComplementList(List* start, const char* f_name);
 *   ‘”Õ ÷»» Ã¿Õ»œ”Àﬂ÷»… — Œ“ƒ≈À‹Õ€Ã» ƒ¿ÕÕ€Ã» —“–¿Õ»÷€    *
 *********************************************************/
 
+List* givePage(List* start, int position);
+
 void setNumber(List* start, int position, int number);
 void setPrice(List* start, int position, float newPrice);
 
