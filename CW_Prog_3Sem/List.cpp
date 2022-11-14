@@ -41,9 +41,9 @@ void deletePage(List* start, int position) {
 	delete del;
 }
 void deleteList(List* start) {
-	List* current = start;
+	List* current = start->next;
 
-	while (current->next != NULL) {
+	while (current != start) {
 		current = current->next;
 		delete start;
 		start = current;
@@ -59,7 +59,7 @@ void deleteList(List* start) {
 void printConsole(List* start) {
 	List* current = start;
 
-	while (current!=NULL) {	
+	do  {	
 		cout << endl 
 			<<current->number<<endl
 			<<current->price<<endl			
@@ -73,7 +73,7 @@ void printConsole(List* start) {
 			<<current->deliveryTime<<endl;
 
 		current = current->next;
-	}
+	} while (current != start);
 }
 void fileReadList(List* start, const char* f_name) {
 	int i = 1;
@@ -98,13 +98,14 @@ void fileReadList(List* start, const char* f_name) {
 			current = current->next;
 		}
 	}
+	current->next = start;
 	ifs.close();
 }
 void fileComplementList(List* start, const char* f_name) {
 	List* current = start;
 	int i = 1;
 
-	while (current->next != NULL) {
+	while (current->next != start) {
 		current = current->next;
 		i++;
 	}
@@ -128,6 +129,7 @@ void fileComplementList(List* start, const char* f_name) {
 			current = current->next;
 		}
 	}
+	current->next = start;
 }
 
 /*********************************************************
@@ -138,7 +140,7 @@ List* givePage(List* start, int position) {
 	List* current = start;
 
 	for (int i = 0; i < position; i++) {
-		if (current->next = NULL) {
+		if (current->next == start) {
 			break;
 		}
 		current = current->next;
@@ -151,7 +153,7 @@ void setNumber(List* start, int position, int number)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->number = number;
@@ -161,7 +163,7 @@ void setPrice(List* start, int position, float newPrice)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->price = newPrice;
@@ -172,7 +174,7 @@ void setName(List* start, int position, string newName)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->name = newName;
@@ -182,7 +184,7 @@ void setSurname(List* start, int position, string newSurname)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->surname = newSurname;
@@ -192,7 +194,7 @@ void setPhoneNumber(List* start, int position, string phoneNumber)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->phoneNumber = phoneNumber;
@@ -203,7 +205,7 @@ void setType(List* start, int position, string newType)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->type = newType;
@@ -213,7 +215,7 @@ void setProductionTime(List* start, int position, string newData)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->productionTime = newData;
@@ -224,7 +226,7 @@ void setPriceOfAccessories(List* start, int position, string newData)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->priceOfAccessories = newData;
@@ -234,7 +236,7 @@ void setSupplier(List* start, int position, string newData)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->supplier = newData;
@@ -244,7 +246,7 @@ void setDeliveryTime(List* start, int position, string newData)
 	List* current = start;
 	int i = 0;
 
-	while ((current->next != NULL) && (i < position)) {
+	while ((current->next != start) && (i < position)) {
 		current = current->next;
 	}
 	current->deliveryTime = newData;
@@ -287,7 +289,7 @@ List* findNumber(List* start, int key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -321,7 +323,7 @@ List* findPrice(List* start, float key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -355,7 +357,7 @@ List* findName(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -363,6 +365,7 @@ List* findName(List* start, string key) {
 		}
 	}
 	if (find) {
+		current_answer->next = answer;
 		return answer;
 	}
 	else {
@@ -389,7 +392,7 @@ List* findSurname(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -423,7 +426,7 @@ List* findPhoneNumber(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -457,7 +460,7 @@ List* findType(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -492,7 +495,7 @@ List* findProductionTime(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -526,7 +529,7 @@ List* findPriceOfAccessories(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -560,7 +563,7 @@ List* findSupplier(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
@@ -595,7 +598,7 @@ List* findDeliveryTime(List* start, string key) {
 				copyData(current, current_answer);
 			}
 		}
-		if (current->next != NULL) {
+		if (current->next != start) {
 			current = current->next;
 		}
 		else {
