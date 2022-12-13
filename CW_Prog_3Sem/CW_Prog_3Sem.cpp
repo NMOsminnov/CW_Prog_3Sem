@@ -17,9 +17,9 @@ int main()
 	printConsole(start);
 	answer = findName(start, "door1");
 
-	cout << "-------------------" << endl;
+
 	printConsole(answer);
-	cout << "-------------------" << endl;
+
 	printConsole(start);
 	
 

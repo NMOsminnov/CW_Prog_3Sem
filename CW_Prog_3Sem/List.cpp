@@ -1,79 +1,105 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 #include "List.h"
 
 using namespace std;
 
 
-/***********************************
-*  Ã≈“Œƒ€ Ã¿Õ»œ”Àﬂ÷»… —Œ —œ»— ¿Ã»  * 
-***********************************/
-
-void addPage(List* start, int num) {
-
-	int i = 0;
-
-	List* current = start;
-	List* New = new List;
-
-	while ((i < num - 1) && (current->next != NULL)) {
-		current = current->next;
-	}
-
-	New->next = current->next;
-	current->next = New;
-}
-
-
-void deletePage(List* start, int position) {
-	int i = 0;
-
-	List* current = start;
-	List* del;
-
-	while ((current->next->next != NULL) && (i < position - 1)) {
-		current = current->next;
-	}
-	del = current->next;
-	current->next = del->next;
-	delete del;
-}
-void deleteList(List* start) {
-	List* current = start->next;
-
-	while (current != start) {
-		current = current->next;
-		delete start;
-		start = current;
-	}
-	delete start;
-}
-
-
-	/**************************
+/**************************
 	*   Ã≈“Œƒ€ ¬¬Œƒ¿-¬€¬Œƒ¿	  *
 	**************************/
+
+const int number_lenght = 6;
+const int price_lenght = 10;
+const int name_lenght = 10;
+const int type_lenght = 20;
+const int productionTime_lenght =15;
+const int phoneNumber_lenght = 15;
+const int surname_lenght = 10;
+const int priceOfAccessories_lenght = 20;
+const int supplier_lenght = 10;
+const int deliveryTime_lenght = 15;
+
+const char horizontalLine = '-';
+const char verticalLine = '|';
+const char corner = '+';
+const char space = ' ';
 
 void printConsole(List* start) {
 	List* current = start;
 
-	do  {	
-		cout << endl 
-			<<current->number<<endl
-			<<current->price<<endl			
-			<<current->name<<endl
-			<<current->type<<endl
-			<<current->productionTime<<endl
-			<<current->phoneNumber<<endl
-			<<current->surname<<endl
-			<<current->priceOfAccessories<<endl
-			<<current->supplier<<endl
-			<<current->deliveryTime<<endl;
+
+	cout << setfill(horizontalLine)				<< corner
+		 << setw(number_lenght + 1)				<< corner
+		 << setw(type_lenght + 1)				<< corner
+		 << setw(productionTime_lenght + 1)		<< corner
+		 << setw(deliveryTime_lenght + 1)		<< corner
+		 << setw(price_lenght + 1)				<< corner
+		 << setw(priceOfAccessories_lenght + 1)	<< corner
+		 << setw(supplier_lenght + 1)			<< corner
+		 << setw(name_lenght + 1)				<< corner
+		 << setw(surname_lenght + 1)			<< corner
+		 << setw(phoneNumber_lenght + 1)		<< corner << endl;
+
+	cout << setfill(space)
+		<< verticalLine << setw(number_lenght)				<< "Number"			 << right
+		<< verticalLine << setw(type_lenght)				<< "Type"			 << right
+		<< verticalLine << setw(productionTime_lenght)		<< "Production time" << right
+		<< verticalLine << setw(deliveryTime_lenght)		<< "Delivery time"	 << right
+		<< verticalLine << setw(price_lenght)				<< "Price"			 << right
+		<< verticalLine << setw(priceOfAccessories_lenght)	<< "Cost price"		 << right
+		<< verticalLine << setw(supplier_lenght)			<< "Supplier"		 << right
+		<< verticalLine << setw(name_lenght)				<< "Name"			 << right
+		<< verticalLine << setw(surname_lenght)				<< "Surname"		 << right
+		<< verticalLine << setw(phoneNumber_lenght)			<< "Phone number"	 << right
+		<< verticalLine << endl;
+
+	do {
+
+		cout << setfill(horizontalLine)					<< corner
+			 << setw(number_lenght + 1)					<< corner
+			 << setw(type_lenght + 1)					<< corner
+			 << setw(productionTime_lenght + 1)			<< corner
+			 << setw(deliveryTime_lenght + 1)			<< corner
+			 << setw(price_lenght + 1)					<< corner
+			 << setw(priceOfAccessories_lenght + 1)		<< corner
+			 << setw(supplier_lenght + 1)				<< corner
+			 << setw(name_lenght + 1)					<< corner 
+		 	 << setw(surname_lenght + 1)				<< corner
+		     << setw(phoneNumber_lenght + 1)			<< corner << endl;
+
+		cout <<setfill(space) 
+			 << verticalLine << setw(number_lenght)				<< current->number				<< right
+			 << verticalLine << setw(type_lenght)				<< current->type				<< right
+			 << verticalLine << setw(productionTime_lenght)		<< current->productionTime		<< right	
+			 << verticalLine << setw(deliveryTime_lenght)		<< current->deliveryTime		<< right	
+			 << verticalLine << setw(price_lenght)				<< current->price				<< right
+			 << verticalLine << setw(priceOfAccessories_lenght)	<< current->priceOfAccessories	<< right
+			 << verticalLine << setw(supplier_lenght)			<< current->supplier			<< right
+			 << verticalLine << setw(name_lenght)				<< current->name				<< right
+			 << verticalLine << setw(surname_lenght)			<< current->surname				<< right
+			 << verticalLine << setw(phoneNumber_lenght)		<< current->phoneNumber			<< right
+			 << verticalLine << endl;
 
 		current = current->next;
 	} while (current != start);
+
+	cout << setfill(horizontalLine)				<< corner
+		 << setw(number_lenght + 1)				<< corner
+		 << setw(type_lenght + 1)				<< corner
+		 << setw(productionTime_lenght + 1)		<< corner
+		 << setw(deliveryTime_lenght + 1)		<< corner
+		 << setw(price_lenght + 1)				<< corner
+		 << setw(priceOfAccessories_lenght + 1)	<< corner
+		 << setw(supplier_lenght + 1)			<< corner
+		 << setw(name_lenght + 1)				<< corner
+		 << setw(surname_lenght + 1)			<< corner
+		 << setw(phoneNumber_lenght + 1)		<< corner << endl;
+
+	cout << endl << endl;
 }
 void fileReadList(List* start, const char* f_name) {
 	int i = 1;
@@ -132,6 +158,55 @@ void fileComplementList(List* start, const char* f_name) {
 	current->next = start;
 }
 
+
+
+
+/***********************************
+*  Ã≈“Œƒ€ Ã¿Õ»œ”Àﬂ÷»… —Œ —œ»— ¿Ã»  * 
+***********************************/
+
+void addPage(List* start, int num) {
+
+	int i = 0;
+
+	List* current = start;
+	List* New = new List;
+
+	while ((i < num - 1) && (current->next != NULL)) {
+		current = current->next;
+	}
+
+	New->next = current->next;
+	current->next = New;
+}
+
+
+void deletePage(List* start, int position) {
+	int i = 0;
+
+	List* current = start;
+	List* del;
+
+	while ((current->next->next != NULL) && (i < position - 1)) {
+		current = current->next;
+	}
+	del = current->next;
+	current->next = del->next;
+	delete del;
+}
+void deleteList(List* start) {
+	List* current = start->next;
+
+	while (current != start) {
+		current = current->next;
+		delete start;
+		start = current;
+	}
+	delete start;
+}
+
+
+	
 /*********************************************************
 *   ‘”Õ ÷»» Ã¿Õ»œ”Àﬂ÷»… — Œ“ƒ≈À‹Õ€Ã» ƒ¿ÕÕ€Ã» —“–¿Õ»÷€    *
 *********************************************************/
@@ -258,6 +333,7 @@ void copyData(List* from, List* to) {
 	to->number = from->number;
 	to->phoneNumber = from->phoneNumber;
 	to->price = from->price;
+	to->surname = from->surname;
 	to->priceOfAccessories = from->priceOfAccessories;
 	to->productionTime = from->productionTime;
 	to->supplier = from->supplier;
